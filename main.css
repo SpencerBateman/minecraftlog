@@ -16,19 +16,21 @@ text-align: center;
 }
 
 ul {
-  margin: 10px 0;
+  margin 10px auto;
   list-style: none;
+  background: #f5f4f7;
+  max-width: 700px;
 }
 
 .time {
-  background: lightgray;
+  background: white;
   width: 20px;
   border-radius: 3px;
-  
 }
 
 li {
-  line-height: 1.4
+  line-height: 1.4;
+  margin: 4px 0;
 }
 
 .INFO {
