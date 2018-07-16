@@ -1,0 +1,36 @@
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Poppins', sans-serif;
+}
+
+a, p, li {
+  font-family: 'Anonymous Pro', monospace;
+}
+
+body {
+max-width: 750px;
+margin: 50px auto;
+}
+
+h1 {
+text-align: center;
+}
+
+ul {
+  margin: 10px 0;
+  list-style: none;
+}
+
+.time {
+  background: lightgray;
+  width: 20px;
+  border-radius: 3px;
+  
+}
+
+li {
+  line-height: 1.4
+}
+
+.INFO {
+background: #f2f2f2;
+}
