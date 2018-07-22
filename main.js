@@ -7,29 +7,39 @@ String.prototype.insert = function (index, string) {
     return string + this;
 };
 
-$.get('latest.log', { "_": $.now() }, function (data) {
-  arrayOfLines = data.match(/[^\r\n]+/g);
-  arrayOfLines.reverse();
-  for (var line of arrayOfLines) {
-    time = line.split(' ', 1)
-    time  = time[0].slice(1, -1)
+$.get('latest.log', { "-": $.now() }, function (data) {
+  count = 0
+  lines = data.match(/[^\r\n]+/g).reverse();
+  for (line of lines) {
+    count += 1
+    ul = $('.log__list')
+    list_item_id = 'item--' + count
+
+    ul.append('<li class="log__item" id="' + list_item_id + '">')
+    player = ''
+    coords = ''
+    message = ''
     text = line.split(']: ', 2)[1]
     text = text.replace('<', '')
     text = text.replace('>', '')
-    for (var name of names) {
+    // Determine which player is being referred to in the line
+    for (name of names) {
       if (text.indexOf(name) != -1) {
-        startOfName = text.indexOf(name)
-        endOfName = (text.indexOf(name) + name.length)
-        console.log(startOfName)
-        console.log(endOfName)
-        text = text.insert(endOfName, '</span>')
-        startString = '<span class="' + name + '">'
-        text = text.insert(startOfName, startString)
+        player = name
       }
     }
-    if (text.substring(0,4) != 'UUID') {
-      $('.log__list').append('<li class="log__item"><span class="time">' + time + '</span>' + '</span><span class="text">  -- ' + text + '</span></li>')
+    // Append a specific message to when logging in for the first time.
+    if (text.indexOf('logged in with entity id') != -1) {
+      coords = data.match(/\(([^)]+)\)/)
+      message = ' logged in at '
     }
+    console.log(player)
+    console.log(coords)
+    console.log(message)
+    $('#' + list_item_id).append('<img class="photo" src="img/' + player + '.png">')
+    $('#' + list_item_id).append('<div class="text_container">')
+    $('#' + list_item_id + ' .text_container').append('<h3>' + player + '</h3>')
+    $('#' + list_item_id).append('</div>')
+    $('#' + list_item_id).append('</li>')
   }
 });
-
